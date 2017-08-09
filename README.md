@@ -1,2 +1,2 @@
 # PowerShell
-Misc Powershell Files and profile
+Misc Powershell Files and Profiles
