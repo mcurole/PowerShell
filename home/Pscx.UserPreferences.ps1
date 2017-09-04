@@ -22,7 +22,7 @@
     CD_EchoNewLocation = $true        # Display new provider location after using cd (Set-LocationEx).
                                       # Mutually exclusive with CD_GetChildItem.
     
-    TextEditor = 'Notepad.exe'        # Default text editor used by the Edit-File function
+    TextEditor = 'C:\Program Files\Microsoft VS Code\Code.exe'        # Default text editor used by the Edit-File function
     
     PromptTheme = 'Modern'            # Prompt string and window title updates.  To enable, first
                                       # set the ModulesToImport setting for Prompt below to $true.
@@ -45,11 +45,11 @@
                                       
 	ModulesToImport = @{
 		CD                = $true
-		DirectoryServices = $true
+		DirectoryServices = $false
 		FileSystem        = $true
 		GetHelp           = $true
 		Net               = $true
-		Prompt            = $true    # Disabled by default because a lot of users have already established prompt functions.
+		Prompt            = $false    # Disabled by default because a lot of users have already established prompt functions.
 		TranscribeSession = $false    # Disabled by default for security and privacy reasons.
 		Utility           = $true
 		Vhd               = $true
