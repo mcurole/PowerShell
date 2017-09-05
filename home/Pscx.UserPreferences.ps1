@@ -49,7 +49,7 @@
 		FileSystem        = $true
 		GetHelp           = $true
 		Net               = $true
-		Prompt            = $true    # Disabled by default because a lot of users have already established prompt functions.
+		Prompt            = $false    # Disabled by default because a lot of users have already established prompt functions.
 		TranscribeSession = $false    # Disabled by default for security and privacy reasons.
 		Utility           = $true
 		Vhd               = $true
