@@ -1,11 +1,3 @@
-# If (-not (Test-IsAdmin)) {
-#     . "C:\Program Files (x86)\VMware\Infrastructure\PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1"
-
-#     Import-Module Hyper-V
-#     Remove-Module Hyper-V
-
-# }
-
 Import-Module Pscx -arg "$(Split-Path $profile -parent)\Pscx.UserPreferences.ps1"
 
 New-PSDrive -Name Docs -PSProvider FileSystem -Root ([environment]::GetFolderPath('MyDocuments')) | Out-Null
