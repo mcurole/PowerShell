@@ -13,3 +13,7 @@ $PSDefaultParameterValues = @{
 
 Import-Module posh-docker
 Import-Module posh-git
+
+New-Alias -Name cvis -Value Clear-VIServers
+New-Alias -Name sde -Value Switch-DockerEngine
+New-Alias -Name rds -Value Connect-RdServer
