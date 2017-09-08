@@ -17,3 +17,6 @@ Import-Module posh-git
 New-Alias -Name cvis -Value Clear-VIServers
 New-Alias -Name sde -Value Switch-DockerEngine
 New-Alias -Name rds -Value Connect-RdServer
+New-Alias -Name rh -Value Resolve-DnsName
+New-Alias -Name zip -Value Microsoft.PowerShell.Archive\Compress-Archive
+New-Alias -Name unzip -Value Microsoft.PowerShell.Archive\Expand-Archive
