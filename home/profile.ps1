@@ -1,5 +1,3 @@
-Import-Module Pscx -arg "$(Split-Path $profile -parent)\Pscx.UserPreferences.ps1"
-
 New-PSDrive -Name Docs -PSProvider FileSystem -Root ([environment]::GetFolderPath('MyDocuments')) | Out-Null
 New-PSDrive -Name Downloads -PSProvider FileSystem -Root ([environment]::GetFolderPath('UserProfile') + "\Downloads") | Out-Null
 
@@ -17,6 +15,8 @@ New-Alias -Name rds -Value Connect-RdServer -Force
 New-Alias -Name rh -Value Resolve-DnsName -Force
 New-Alias -Name zip -Value Microsoft.PowerShell.Archive\Compress-Archive -Force
 New-Alias -Name unzip -Value Microsoft.PowerShell.Archive\Expand-Archive -Force
+New-Alias -name ocb -Value Microsoft.PowerShell.Management\Set-Clipboard -Force
+New-Alias -name gcb -Value Microsoft.PowerShell.Management\Get-Clipboard -Force
 
 Function Test-Administrator {
     $user = [Security.Principal.WindowsIdentity]::GetCurrent();
