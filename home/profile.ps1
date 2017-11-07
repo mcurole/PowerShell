@@ -2,7 +2,6 @@ New-PSDrive -Name Docs -PSProvider FileSystem -Root ([environment]::GetFolderPat
 New-PSDrive -Name Downloads -PSProvider FileSystem -Root ([environment]::GetFolderPath('UserProfile') + "\Downloads") | Out-Null
 
 $PSDefaultParameterValues = @{
-    "Enter-PSSession:Authentication" = "Credssp"
     "Set-AuthenticodeSignature:TimestampServer" = "http://timestamp.verisign.com/scripts/timstamp.dll"
     }
 
