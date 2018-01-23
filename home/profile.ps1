@@ -1,5 +1,14 @@
-New-PSDrive -Name Docs -PSProvider FileSystem -Root ([environment]::GetFolderPath('MyDocuments')) | Out-Null
-New-PSDrive -Name Downloads -PSProvider FileSystem -Root ([environment]::GetFolderPath('UserProfile') + "\Downloads") | Out-Null
+# PowerShell profile
+# Updated 1/23/2018 - Update profile to work with Windows PowerShell and PowerShell Core
+
+If ($PSVersionTable.PSEdition -eq "Core") {
+    Add-WindowsPSModulePath
+}
+
+If (($PSVersionTable.PSEdition -eq "Desktop") -or $IsWindows ) {
+    New-PSDrive -Name Docs -PSProvider FileSystem -Root ([environment]::GetFolderPath('MyDocuments')) | Out-Null
+    New-PSDrive -Name Downloads -PSProvider FileSystem -Root ([environment]::GetFolderPath('UserProfile') + "\Downloads") | Out-Null
+}
 
 $PSDefaultParameterValues = @{
     "Set-AuthenticodeSignature:TimestampServer" = "http://timestamp.verisign.com/scripts/timstamp.dll"
@@ -18,8 +27,10 @@ New-Alias -name ocb -Value Microsoft.PowerShell.Management\Set-Clipboard -Force
 New-Alias -name gcb -Value Microsoft.PowerShell.Management\Get-Clipboard -Force
 
 Function Test-Administrator {
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+    If (($PSVersionTable.PSEdition -eq "Desktop") -or $IsWindows ) {
+        $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+        (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+    } else { $false }
 }
 
 Function prompt {
