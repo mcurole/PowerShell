@@ -4,6 +4,11 @@ Deploy ProfileFiles {
     
     By FileSystem  {
     FromSource 'home'
-    To (Resolve-Path "$profile\..")
+    To (Join-Path $HOME "Documents\WindowsPowerShell")
+    }
+
+    By FileSystem {
+        FromSource 'home'
+        To (Join-Path $HOME "Documents\PowerShell")
     }
 }
