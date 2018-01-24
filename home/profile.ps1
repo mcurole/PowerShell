@@ -3,6 +3,7 @@
 # Revision History
 # 1.0 - Unknown - Original Version
 # 1.1 - 1/24/2018 - Updated for support of cloud shell
+# 1.2 - 1/24/2018 - Updated prompt for Cloud Shell and PSVersion
 
 $IsACS = Test-Path Env:\ACC_CLOUD
 
@@ -47,18 +48,25 @@ Function prompt {
 
     Write-Host
 
-    if (Test-Administrator) {  # Use different username if elevated
-        Write-Host "(Elevated) " -NoNewline -ForegroundColor White
+    if ($IsACS) {
+        Write-Host "Azure CS" -NoNewline -ForegroundColor Green
     }
+    else {
+        if (Test-Administrator) {
+            # Use different username if elevated
+            Write-Host "(Elevated) " -NoNewline -ForegroundColor White
+        }
 
-    Write-Host "$ENV:USERNAME@" -NoNewline -ForegroundColor DarkYellow
-    Write-Host "$ENV:COMPUTERNAME" -NoNewline -ForegroundColor Magenta
+        Write-Host "$ENV:USERNAME@" -NoNewline -ForegroundColor DarkYellow
+        Write-Host "$ENV:COMPUTERNAME" -NoNewline -ForegroundColor Magenta
+    }
 
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
     Write-Host $($(Get-Location) -replace ($env:USERPROFILE).Replace('\','\\'), "~") -NoNewline -ForegroundColor Blue
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
     Write-Host (Get-Date -Format G) -NoNewline -ForegroundColor Magenta
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
+    Write-Host "PSver $($PSVersionTable.PSVersion)" -NoNewline 
 
     $global:LASTEXITCODE = $realLASTEXITCODE
 
