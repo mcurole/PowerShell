@@ -6,6 +6,10 @@
 
 $IsACS = Test-Path Env:\ACC_CLOUD
 
+if ($IsACS -and -not (Test-Path $home\Documents\PowerShell\Modules)) {
+    New-Item -ItemType SymbolicLink -Path $home\Documents\PowerShell -Name Modules -Value $home\CloudDrive\.pscloudshell\PowerShell\Modules
+}
+
 If ($PSVersionTable.PSEdition -eq "Core") {
     if (Get-Module -Name WindowsPSModulePath -ListAvailable) { Add-WindowsPSModulePath }
 }
