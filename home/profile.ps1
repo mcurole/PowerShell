@@ -1,8 +1,13 @@
 # PowerShell profile
 # Updated 1/23/2018 - Update profile to work with Windows PowerShell and PowerShell Core
+# Revision History
+# 1.0 - Unknown - Original Version
+# 1.1 - 1/24/2018 - Updated for support of cloud shell
+
+$IsACS = Test-Path Env:\ACC_CLOUD
 
 If ($PSVersionTable.PSEdition -eq "Core") {
-    Add-WindowsPSModulePath
+    if (Get-Module -Name WindowsPSModulePath -ListAvailable) { Add-WindowsPSModulePath }
 }
 
 If (($PSVersionTable.PSEdition -eq "Desktop") -or $IsWindows ) {
@@ -14,8 +19,8 @@ $PSDefaultParameterValues = @{
     "Set-AuthenticodeSignature:TimestampServer" = "http://timestamp.verisign.com/scripts/timstamp.dll"
     }
 
-Import-Module posh-docker
-Import-Module posh-git
+if (Get-Module -Name posh-docker -ListAvailable) { Import-Module posh-docker }
+if (Get-Module -name posh-git -ListAvailable) { Import-Module posh-git }
 
 New-Alias -Name cvis -Value Clear-VIServers -Force 
 New-Alias -Name sde -Value Switch-DockerEngine -Force
@@ -48,7 +53,7 @@ Function prompt {
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
     Write-Host $($(Get-Location) -replace ($env:USERPROFILE).Replace('\','\\'), "~") -NoNewline -ForegroundColor Blue
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
-    Write-Host (Get-Date -Format G) -NoNewline -ForegroundColor DarkMagenta
+    Write-Host (Get-Date -Format G) -NoNewline -ForegroundColor Magenta
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
 
     $global:LASTEXITCODE = $realLASTEXITCODE
