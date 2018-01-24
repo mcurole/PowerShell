@@ -7,7 +7,7 @@
 $IsACS = Test-Path Env:\ACC_CLOUD
 
 if ($IsACS -and -not (Test-Path $home\Documents\PowerShell\Modules)) {
-    New-Item -ItemType SymbolicLink -Path $home\Documents\PowerShell -Name Modules -Value $home\CloudDrive\.pscloudshell\PowerShell\Modules
+    New-Item -ItemType SymbolicLink -Path $home\Documents\PowerShell -Name Modules -Value $home\CloudDrive\.pscloudshell\PowerShell\Modules | Out-Null 
 }
 
 If ($PSVersionTable.PSEdition -eq "Core") {
