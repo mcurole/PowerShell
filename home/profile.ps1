@@ -4,6 +4,7 @@
 # 1.0 - Unknown - Original Version
 # 1.1 - 1/24/2018 - Updated for support of cloud shell
 # 1.2 - 1/24/2018 - Updated prompt for Cloud Shell and PSVersion
+# 1.3 - 2/1/2018  - Updated prompt for Ubuntu support
 
 $IsACS = Test-Path Env:\ACC_CLOUD
 
@@ -57,12 +58,13 @@ Function prompt {
             Write-Host "(Elevated) " -NoNewline -ForegroundColor White
         }
 
-        Write-Host "$ENV:USERNAME@" -NoNewline -ForegroundColor DarkYellow
-        Write-Host "$ENV:COMPUTERNAME" -NoNewline -ForegroundColor Magenta
+        Write-Host (whoami) -NoNewline -ForegroundColor DarkYellow
+        Write-Host "@" -NoNewline -ForegroundColor DarkYellow
+        Write-Host (hostname) -NoNewline -ForegroundColor Magenta
     }
 
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
-    Write-Host $($(Get-Location) -replace ($env:USERPROFILE).Replace('\','\\'), "~") -NoNewline -ForegroundColor Blue
+    Write-Host $($(Get-Location) -replace ($env:HOME).Replace('\','\\'), "~") -NoNewline -ForegroundColor Blue
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
     Write-Host (Get-Date -Format G) -NoNewline -ForegroundColor Magenta
     Write-Host " : " -NoNewline -ForegroundColor DarkGray
