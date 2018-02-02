@@ -47,34 +47,35 @@ Function Test-Administrator {
 Function prompt {
     $realLASTEXITCODE = $LASTEXITCODE
 
-    Write-Host
+    $p = "`n"
 
     if ($IsACS) {
-        Write-Host "Azure CS" -NoNewline -ForegroundColor Green
+        $p += "Azure CS"
     }
     else {
         if (Test-Administrator) {
             # Use different username if elevated
-            Write-Host "(Elevated) " -NoNewline -ForegroundColor White
+            $p += "(Elevated) "
         }
 
-        Write-Host (whoami) -NoNewline -ForegroundColor DarkYellow
-        Write-Host "@" -NoNewline -ForegroundColor DarkYellow
-        Write-Host (hostname) -NoNewline -ForegroundColor Magenta
+        $p += (whoami)
+        $p += "@"
+        $p += (hostname)
     }
 
-    Write-Host " : " -NoNewline -ForegroundColor DarkGray
-    Write-Host $($(Get-Location) -replace ($env:HOME).Replace('\','\\'), "~") -NoNewline -ForegroundColor Blue
-    Write-Host " : " -NoNewline -ForegroundColor DarkGray
-    Write-Host (Get-Date -Format G) -NoNewline -ForegroundColor Magenta
-    Write-Host " : " -NoNewline -ForegroundColor DarkGray
-    Write-Host "PSver $($PSVersionTable.PSVersion)" -NoNewline 
+    $p += " : "
+    $p += $($(Get-Location) -replace ($env:HOME).Replace('\', '\\'), "~")
+    $p += " : "
+    $p += (Get-Date -Format G)
+    $p += " : " 
+    $p += "PSver $($PSVersionTable.PSVersion)`n> "
 
     $global:LASTEXITCODE = $realLASTEXITCODE
 
-    Write-VcsStatus
+    if ( Get-Module posh-git -ListAvailable) {
+        $p += Write-VcsStatus        
+    }
 
-    Write-Host ""
+    return $p 
 
-    return "> "
 }
