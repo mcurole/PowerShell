@@ -5,11 +5,24 @@
 # 1.1 - 1/24/2018 - Updated for support of cloud shell
 # 1.2 - 1/24/2018 - Updated prompt for Cloud Shell and PSVersion
 # 1.3 - 2/1/2018  - Updated prompt for Ubuntu support
+# 1.4 - 2/7/2018  - Update to support .ssh key folder persistance in Azure Cloud Shell
 
 $IsACS = Test-Path Env:\ACC_CLOUD
 
-if ($IsACS -and -not (Test-Path $home\Documents\PowerShell\Modules)) {
-    New-Item -ItemType SymbolicLink -Path $home\Documents\PowerShell -Name Modules -Value $home\CloudDrive\.pscloudshell\PowerShell\Modules | Out-Null 
+if ($IsACS) {
+    if (-not (Test-Path $home\CloudDrive\.pscloudshell\PowerShell\Modules)) {
+        New-item -ItemType Directory -Path $home\CloudDrive\.pscloudshell\PowerShell\Modules
+    }
+    if (-not (Test-Path $home\Documents\PowerShell\Modules)) {
+        New-Item -ItemType SymbolicLink -Path $home\Documents\PowerShell -Name Modules -Value $home\CloudDrive\.pscloudshell\PowerShell\Modules | Out-Null 
+    }
+
+    if (-not (Test-Path $home\CloudDrive\.ssh)) {
+        New-Item -ItemType Directory -Path  $home\CloudDrive\.ssh
+    }
+    if (-not (Test-Path $home\.ssh)) {
+        New-Item -ItemType SymbolicLink -Path $home -Name .ssh -Value $home\CloudDrive\.ssh | Out-Null 
+    }
 }
 
 If ($PSVersionTable.PSEdition -eq "Core") {
