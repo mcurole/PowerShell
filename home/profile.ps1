@@ -6,6 +6,7 @@
 # 1.2 - 1/24/2018 - Updated prompt for Cloud Shell and PSVersion
 # 1.3 - 2/1/2018  - Updated prompt for Ubuntu support
 # 1.4 - 2/7/2018  - Update to support .ssh key folder persistance in Azure Cloud Shell
+# 1.5 - 3/28/2018 - Update to remove curl alias on Windows when curl.exe is present
 
 $IsACS = Test-Path Env:\ACC_CLOUD
 
@@ -32,6 +33,9 @@ If ($PSVersionTable.PSEdition -eq "Core") {
 If (($PSVersionTable.PSEdition -eq "Desktop") -or $IsWindows ) {
     New-PSDrive -Name Docs -PSProvider FileSystem -Root ([environment]::GetFolderPath('MyDocuments')) | Out-Null
     New-PSDrive -Name Downloads -PSProvider FileSystem -Root ([environment]::GetFolderPath('UserProfile') + "\Downloads") | Out-Null
+    if ((Test-Path "$env:systemroot\system32\curl.exe") -and (Test-Path alias:\curl)) {
+        Remove-Item -Path alias:\curl
+    }
 }
 
 $PSDefaultParameterValues = @{
