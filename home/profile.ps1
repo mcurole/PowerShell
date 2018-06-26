@@ -11,11 +11,11 @@
 $IsACS = Test-Path Env:\ACC_CLOUD
 
 if ($IsACS) {
-    if (-not (Test-Path $home\CloudDrive\.pscloudshell\PowerShell\Modules)) {
-        New-item -ItemType Directory -Path $home\CloudDrive\.pscloudshell\PowerShell\Modules
+    if (-not (Test-Path $home\CloudDrive\Projects)) {
+        New-item -ItemType Directory -Path $home\CloudDrive\Projects
     }
-    if (-not (Test-Path $home\Documents\PowerShell\Modules)) {
-        New-Item -ItemType SymbolicLink -Path $home\Documents\PowerShell -Name Modules -Value $home\CloudDrive\.pscloudshell\PowerShell\Modules | Out-Null 
+    if (-not (Test-Path $home\Documents\Projects)) {
+        New-Item -ItemType SymbolicLink -Path $home\Documents -Name Projects -Value $home\CloudDrive\Projects | Out-Null 
     }
 
     if (-not (Test-Path $home\CloudDrive\.ssh)) {
