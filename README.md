@@ -5,8 +5,8 @@ This is my default powershell profile. It is designed to be multiplatform - test
 ## Installation
 Execute the following commands to install.
 
-    New-Item ~/Documents/Projects
-    Set-Location ~/Documents/Projects
+    New-Item $home/Documents/Projects
+    Set-Location $home/Documents/Projects
     git clone https://github.com/mcurole/PowerShell-Profile.git
     Copy-Item PowerShell-Profile/home/bootstrap_profile.ps1 $profile.CurrentUserAllHosts 
 
