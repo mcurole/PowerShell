@@ -7,6 +7,7 @@
 # 1.3 - 2/1/2018  - Updated prompt for Ubuntu support
 # 1.4 - 2/7/2018  - Update to support .ssh key folder persistance in Azure Cloud Shell
 # 1.5 - 3/28/2018 - Update to remove curl alias on Windows when curl.exe is present
+# 1.6 - 6/26/2018 - Update to sync via github.com
 
 $IsACS = Test-Path Env:\ACC_CLOUD
 
