@@ -9,16 +9,7 @@
 # 1.5 - 3/28/2018 - Update to remove curl alias on Windows when curl.exe is present
 # 1.6 - 6/26/2018 - Update to sync via github.com
 
-$IsACS = Test-Path Env:\ACC_CLOUD
-
 if ($IsACS) {
-    if (-not (Test-Path $home\CloudDrive\Projects)) {
-        New-item -ItemType Directory -Path $home\CloudDrive\Projects
-    }
-    if (-not (Test-Path $home\Documents\Projects)) {
-        New-Item -ItemType SymbolicLink -Path $home\Documents -Name Projects -Value $home\CloudDrive\Projects | Out-Null 
-    }
-
     if (-not (Test-Path $home\CloudDrive\.ssh)) {
         New-Item -ItemType Directory -Path  $home\CloudDrive\.ssh
     }
