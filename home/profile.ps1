@@ -51,7 +51,7 @@ Function prompt {
 
     $p = "`n"
 
-    if ($IsACS) {
+    if (Test-Path env:\ACC_CLOUD) {
         $p += "Azure CS"
     }
     else {
