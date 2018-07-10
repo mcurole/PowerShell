@@ -9,15 +9,7 @@
 # 1.5 - 3/28/2018 - Update to remove curl alias on Windows when curl.exe is present
 # 1.6 - 6/26/2018 - Update to sync via github.com
 # 1.7 - 7/10/2018 - Update to use WindowsCompatibility module
-
-if ($IsACS) {
-    if (-not (Test-Path $home\CloudDrive\.ssh)) {
-        New-Item -ItemType Directory -Path  $home\CloudDrive\.ssh
-    }
-    if (-not (Test-Path $home\.ssh)) {
-        New-Item -ItemType SymbolicLink -Path $home -Name .ssh -Value $home\CloudDrive\.ssh | Out-Null 
-    }
-}
+# 1.8 - 7/10/2018 - Update for new Azure Cloud Shell
 
 If ($PSVersionTable.PSEdition -eq "Core") {
     if (Get-Module -Name WindowsCompatibility -ListAvailable) { Add-WindowsPSModulePath }
