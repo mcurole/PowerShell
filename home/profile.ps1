@@ -8,6 +8,7 @@
 # 1.4 - 2/7/2018  - Update to support .ssh key folder persistance in Azure Cloud Shell
 # 1.5 - 3/28/2018 - Update to remove curl alias on Windows when curl.exe is present
 # 1.6 - 6/26/2018 - Update to sync via github.com
+# 1.7 - 7/10/2018 - Update to use WindowsCompatibility module
 
 if ($IsACS) {
     if (-not (Test-Path $home\CloudDrive\.ssh)) {
@@ -19,7 +20,7 @@ if ($IsACS) {
 }
 
 If ($PSVersionTable.PSEdition -eq "Core") {
-    if (Get-Module -Name WindowsPSModulePath -ListAvailable) { Add-WindowsPSModulePath }
+    if (Get-Module -Name WindowsCompatibility -ListAvailable) { Add-WindowsPSModulePath }
 }
 
 If (($PSVersionTable.PSEdition -eq "Desktop") -or $IsWindows ) {
