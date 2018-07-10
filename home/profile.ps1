@@ -39,6 +39,8 @@ New-Alias -Name unzip -Value Microsoft.PowerShell.Archive\Expand-Archive -Force
 New-Alias -name ocb -Value Microsoft.PowerShell.Management\Set-Clipboard -Force
 New-Alias -name gcb -Value Microsoft.PowerShell.Management\Get-Clipboard -Force
 
+if (Test-Path env:\ACC_CLOUD) { Set-Location $home }
+
 Function Test-Administrator {
     If (($PSVersionTable.PSEdition -eq "Desktop") -or $IsWindows ) {
         $user = [Security.Principal.WindowsIdentity]::GetCurrent();
