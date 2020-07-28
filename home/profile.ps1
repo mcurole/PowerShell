@@ -29,6 +29,8 @@ $PSDefaultParameterValues = @{
 
 if (Get-Module -Name posh-docker -ListAvailable) { Import-Module posh-docker }
 if (Get-Module -name posh-git -ListAvailable) { Import-Module posh-git }
+if (Get-Module oh-my-posh -ListAvailable) { Import-Module oh-my-posh}
+Set-Theme Paradox
 
 New-Alias -Name cvis -Value Clear-VIServers -Force 
 New-Alias -Name sde -Value Switch-DockerEngine -Force
@@ -48,38 +50,38 @@ Function Test-Administrator {
     } else { $false }
 }
 
-Function prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
+# Function prompt {
+#     $realLASTEXITCODE = $LASTEXITCODE
 
-    $p = "`n"
+#     $p = "`n"
 
-    if (Test-Path env:\ACC_CLOUD) {
-        $p += "Azure CS"
-    }
-    else {
-        if (Test-Administrator) {
-            # Use different username if elevated
-            $p += "(Elevated) "
-        }
+#     if (Test-Path env:\ACC_CLOUD) {
+#         $p += "Azure CS"
+#     }
+#     else {
+#         if (Test-Administrator) {
+#             # Use different username if elevated
+#             $p += "(Elevated) "
+#         }
 
-        $p += (whoami)
-        $p += "@"
-        $p += (hostname)
-    }
+#         $p += (whoami)
+#         $p += "@"
+#         $p += (hostname)
+#     }
 
-    $p += " : "
-    $p += $($(Get-Location) -replace ($env:HOME).Replace('\', '\\'), "~")
-    $p += " : "
-    $p += (Get-Date -Format G)
-    $p += " : " 
-    $p += "PSver $($PSVersionTable.PSVersion)`n> "
+#     $p += " : "
+#     $p += $($(Get-Location) -replace ($env:HOME).Replace('\', '\\'), "~")
+#     $p += " : "
+#     $p += (Get-Date -Format G)
+#     $p += " : " 
+#     $p += "PSver $($PSVersionTable.PSVersion)`n> "
 
-    $global:LASTEXITCODE = $realLASTEXITCODE
+#     $global:LASTEXITCODE = $realLASTEXITCODE
 
-    if ( Get-Module posh-git -ListAvailable) {
-        $p += Write-VcsStatus        
-    }
+#     if ( Get-Module posh-git -ListAvailable) {
+#         $p += Write-VcsStatus        
+#     }
 
-    return $p 
+#     return $p 
 
-}
+# }
