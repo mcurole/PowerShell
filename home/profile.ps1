@@ -1,5 +1,5 @@
 # PowerShell profile
-# Updated 1/23/2018 - Update profile to work with Windows PowerShell and PowerShell Core
+# Updated 4/28/2021 - Update profile to work with Windows PowerShell and PowerShell Core
 # Revision History
 # 1.0 - Unknown - Original Version
 # 1.1 - 1/24/2018 - Updated for support of cloud shell
@@ -10,6 +10,7 @@
 # 1.6 - 6/26/2018 - Update to sync via github.com
 # 1.7 - 7/10/2018 - Update to use WindowsCompatibility module
 # 1.8 - 7/10/2018 - Update for new Azure Cloud Shell
+# 1.9 - 4/28/2021 - Update for oh-my-posh v3
 
 If ($PSVersionTable.PSEdition -eq "Core") {
     if (Get-Module -Name WindowsCompatibility -ListAvailable) { Add-WindowsPSModulePath }
@@ -30,7 +31,7 @@ $PSDefaultParameterValues = @{
 if (Get-Module -Name posh-docker -ListAvailable) { Import-Module posh-docker }
 if (Get-Module -name posh-git -ListAvailable) { Import-Module posh-git }
 if (Get-Module oh-my-posh -ListAvailable) { Import-Module oh-my-posh}
-Set-Theme Paradox
+Set-PoshPrompt -Theme Paradox
 
 New-Alias -Name cvis -Value Clear-VIServers -Force 
 New-Alias -Name sde -Value Switch-DockerEngine -Force
